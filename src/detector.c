@@ -1081,7 +1081,14 @@ void test_detector(char *datacfg, char *cfgfile, char *weightfile, char *filenam
 		if (nms) do_nms_sort(dets, nboxes, l.classes, nms);
 		draw_detections_v3(im, dets, nboxes, thresh, names, alphabet, l.classes);
 		free_detections(dets, nboxes);
-        save_image(im, "predictions");
+		
+		// char output[strlen(input) - 4];
+		// memcpy(output, input + 4, strlen(input) - 8);
+		// char buff[256];
+		// sprintf(buff, "results/%s", output);
+		// save_image(im, buff);
+
+        // save_image(im, "predictions");
 		if (!dont_show) {
 			show_image(im, "predictions");
 		}
