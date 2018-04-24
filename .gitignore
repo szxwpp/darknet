@@ -27,3 +27,9 @@ Thumbs.db
 # CMake #
 cmake-build-debug/
 CMakeLists.txt
+
+
+experiment/
+models/
+
+Makefile
