@@ -31,5 +31,6 @@ CMakeLists.txt
 
 experiment/
 models/
+video/
 
 Makefile
