@@ -1,11 +1,11 @@
 import os
 import subprocess
 
-experiment = 'cardet_20180424'
+experiment = 'cardet_20180423'
 
 
 cfg_path = './experiment/%s/test.cfg' % experiment
-data_path = './experiment/%s/car.data' % experimen
+data_path = './experiment/%s/car.data' % experiment
 weight_path = '/ssd/shizhixiang/models/best/%s.weights' % experiment
 
 
