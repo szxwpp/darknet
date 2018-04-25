@@ -1,0 +1,5 @@
+classes= 20
+train  = /home/shizhixiang/github/data/VOCdevkit/VOC2YOLO_label/train.txt
+valid  = /home/shizhixiang/github/data/VOCdevkit/VOC2YOLO_label/test.txt
+names = ./experiment/experiment_voc/voc.names
+backup = ./experiment/experiment_voc/backup

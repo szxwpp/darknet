@@ -1,0 +1,6 @@
+classes= 1
+train = ./experiment/eval/train.txt
+valid = ./experiment/eval/test.txt
+names = ./experiment/eval/car.names
+backup = /ssd/shizhixiang/models/eval/
+
