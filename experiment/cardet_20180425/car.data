@@ -1,0 +1,6 @@
+classes= 1
+train = ./experiment/cardet_20180425/train.txt
+valid = ./experiment/cardet_20180425/test.txt
+names = ./experiment/cardet_20180425/car.names
+backup = /ssd/shizhixiang/models/cardet_20180425/
+
