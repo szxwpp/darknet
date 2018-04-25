@@ -15,5 +15,5 @@ cd ../../
 ./darknet detector train \
 ./experiment/$experiment_case/car.data \
 ./experiment/$experiment_case/train.cfg \
-/ssd/shizhixiang/models/best/cardet_20180423.conv.105 \
+/ssd/shizhixiang/models/best/cardet_20180419.weights \
 -dont_show -gpus 3 2>&1 | tee ./experiment/$experiment_case/train.log
