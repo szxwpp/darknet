@@ -35,3 +35,6 @@ video/
 Makefile
 
 predictions.jpg
+
+bad.list
+anchors.txt
