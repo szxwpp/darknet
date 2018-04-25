@@ -1,4 +1,4 @@
-experiment_case='cardet_20180425'
+experiment_case='cardet_20180426'
 
 # cd ../../
 
@@ -15,5 +15,5 @@ cd ../../
 ./darknet detector train \
 ./experiment/$experiment_case/car.data \
 ./experiment/$experiment_case/train.cfg \
-/ssd/shizhixiang/models/best/cardet_20180423.weights \
--dont_show -gpus 4 2>&1 | tee ./experiment/$experiment_case/train.log
+/ssd/shizhixiang/models/best/cardet_20180423.conv.105 \
+-dont_show -gpus 3 2>&1 | tee ./experiment/$experiment_case/train.log
