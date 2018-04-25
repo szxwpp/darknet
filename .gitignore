@@ -28,8 +28,7 @@ Thumbs.db
 cmake-build-debug/
 CMakeLists.txt
 
-
-experiment/
+.idea/
 models/
 video/
 
