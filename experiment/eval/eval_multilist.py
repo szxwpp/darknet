@@ -1,12 +1,12 @@
 import os
 import subprocess
 
-experiment = 'cardet_20180419'
+experiment = 'cardet_20180426'
 
 
 cfg_path = './experiment/%s/test.cfg' % experiment
-weight_path = '/ssd/shizhixiang/models/best/%s.weights' % experiment
-
+# weight_path = '/ssd/shizhixiang/models/best/%s.weights' % experiment
+weight_path = '/ssd/shizhixiang/models/%s/train_30680.weights' % experiment
 
 def gen_newdatafile(new_datafile_path, dataset):
     test_list = './experiment/eval/list/eval_%s.txt' % dataset
@@ -24,6 +24,6 @@ for dataset in ['COCO', 'fifth', 'fourth', 'KITTI', 'seventh', 'sixth']:
     new_datafile_path = os.path.join(os.getcwd(), 'car_%s.data' % dataset)
     gen_newdatafile(new_datafile_path, dataset)
 
-    full_log_file = './experiment/eval/eval_list_result/result_%s_%s.txt' % (dataset, experiment)
+    full_log_file = './experiment/eval/eval_list_result/%s_%s.txt' % (experiment, dataset)
     eval_cmd = 'cd ../../ \n ./darknet detector map %s %s %s -dont_show 2>&1 | tee %s' % (new_datafile_path, cfg_path, weight_path, full_log_file)
     subprocess.call(eval_cmd, shell=True)

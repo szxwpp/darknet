@@ -38,3 +38,5 @@ predictions.jpg
 
 bad.list
 anchors.txt
+
+experiment/eval/*.data
