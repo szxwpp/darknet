@@ -6,10 +6,13 @@ if 'Windows' in platform.platform():
 else:
 	base_dir = '/ssd/shizhixiang/dataset'
 
-# experiment = 'eval'
-experiment = 'cardet_20180424'
-minitest_dir = os.path.join(base_dir, 'car_detection', 'minitest_ld', 'resultlabels')
-target_filepath = '%s/result.txt' % experiment
+
+# experiment = 'cardet_20180424'
+# target_filepath = '%s/result.txt' % experiment
+
+target_filepath = 'eval/test_list_result/cardet_20180426_COCO.txt'
+minitest_dir = os.path.join(base_dir, 'car_detection/minitest', 'COCO', 'resultlabels')
+
 
 print(minitest_dir)
 

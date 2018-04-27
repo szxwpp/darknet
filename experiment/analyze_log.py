@@ -2,7 +2,7 @@ import os
 import numpy as np
 import matplotlib.pyplot as plt
 
-experiment = 'cardet_20180419'
+experiment = 'cardet_20180426'
 
 log_file = os.path.join(os.getcwd(), experiment, 'train.log')
 save_dir = os.path.join(os.getcwd(), experiment, 'results')

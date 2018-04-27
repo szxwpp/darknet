@@ -2,7 +2,7 @@ import os
 import numpy as np
 import matplotlib.pyplot as plt
 
-experiment = 'cardet_20180424'
+experiment = 'cardet_20180426'
 log_dir = os.path.join(os.getcwd(), experiment, 'eval_log')
 
 

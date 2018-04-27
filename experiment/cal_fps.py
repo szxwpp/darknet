@@ -1,6 +1,8 @@
 
-experiment = 'cardet_20180416'
-target_filepath = '%s/result.txt' % experiment
+# experiment = 'cardet_20180416'
+# target_filepath = '%s/result.txt' % experiment
+target_filepath = 'eval/test_list_result/cardet_20180426_COCO.txt'
+
 
 def GetTime(line):
     line_seperate = line.strip().split(':')
