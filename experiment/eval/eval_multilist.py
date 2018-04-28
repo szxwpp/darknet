@@ -1,15 +1,15 @@
 import os
 import subprocess
 
-experiment = 'cardet_20180426'
+experiment = 'cardet_20180425'
 
 
 cfg_path = './experiment/%s/test.cfg' % experiment
-# weight_path = '/ssd/shizhixiang/models/best/%s.weights' % experiment
-weight_path = '/ssd/shizhixiang/models/%s/train_30680.weights' % experiment
+weight_path = '/ssd/shizhixiang/models/best/%s.weights' % experiment
+# weight_path = '/ssd/shizhixiang/models/%s/train_30680.weights' % experiment
 
 def gen_newdatafile(new_datafile_path, dataset):
-    test_list = './experiment/eval/list/eval_%s.txt' % dataset
+    test_list = './experiment/eval/list/minitest_%s.txt' % dataset
 
     with open(new_datafile_path, 'w') as filehandle:
         filehandle.write('classes= 1' + '\n')
