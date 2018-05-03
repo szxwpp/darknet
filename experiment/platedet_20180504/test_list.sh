@@ -1,4 +1,4 @@
-experiment_case='platedet_20180502'
+experiment_case='platedet_20180504'
 
 cd ../../
 

@@ -1,4 +1,4 @@
-experiment_case='platedet_20180502'
+experiment_case='platedet_20180504'
 
 # cd ../../
 
@@ -16,4 +16,4 @@ cd ../../
 ./experiment/$experiment_case/plate.data \
 ./experiment/$experiment_case/train.cfg \
 /ssd/shizhixiang/models/platedet_20180502/train_1400.weights \
--gpus 0,1 2>&1 | tee ./experiment/$experiment_case/train.log
+-gpus 3 2>&1 | tee ./experiment/$experiment_case/train.log
