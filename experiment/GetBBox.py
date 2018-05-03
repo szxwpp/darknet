@@ -10,8 +10,9 @@ else:
 # experiment = 'cardet_20180424'
 # target_filepath = '%s/result.txt' % experiment
 
-target_filepath = 'eval/test_list_result/cardet_20180426_COCO.txt'
-minitest_dir = os.path.join(base_dir, 'car_detection/minitest', 'COCO', 'resultlabels')
+dataset = 'third'
+target_filepath = 'eval/test_list_result/cardet_20180426_%s.txt' % dataset
+minitest_dir = os.path.join(base_dir, 'car_detection/minitest', dataset, 'resultlabels')
 
 
 print(minitest_dir)
