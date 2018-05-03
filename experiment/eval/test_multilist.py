@@ -1,7 +1,7 @@
 import os
 import subprocess
 
-experiment = 'cardet_20180426'
+experiment = 'cardet_20180425'
 
 
 cfg_path = './experiment/%s/test.cfg' % experiment
