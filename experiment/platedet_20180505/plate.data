@@ -1,0 +1,6 @@
+classes= 1
+train = ./experiment/platedet_20180505/train.txt
+valid = ./experiment/platedet_20180505/test.txt
+names = ./experiment/platedet_20180505/plate.names
+backup = /ssd/shizhixiang/models/platedet_20180505/
+
