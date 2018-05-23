@@ -2,17 +2,18 @@ import os
 import platform
 
 if 'Windows' in platform.platform():
-	base_dir = 'F:/dataset'
+	base_dir = 'E:/dataset'
 else:
 	base_dir = '/ssd/shizhixiang/dataset'
 
+class_name = 'Plate'
 
 # experiment = 'cardet_20180424'
 # target_filepath = '%s/result.txt' % experiment
 
-dataset = 'third'
-target_filepath = 'eval/test_list_result/cardet_20180426_%s.txt' % dataset
-minitest_dir = os.path.join(base_dir, 'car_detection/minitest', dataset, 'resultlabels')
+dataset = 'fourth'
+target_filepath = 'eval_plate/test_list_result/platedet_20180506_%s.txt' % dataset
+minitest_dir = os.path.join(base_dir, 'plate_detection/minitest', dataset, 'resultlabels')
 
 
 print(minitest_dir)
@@ -33,7 +34,7 @@ pre_bbox_count = 0
 pre_file_count = 0
 for i in range(lines_count-1):
     pre_file_count += lines[i].count('Enter Image Path')
-    pre_bbox_count += lines[i].count('Car')
+    pre_bbox_count += lines[i].count(class_name)
 
 
 def GetLabelFilePath(line):
@@ -64,7 +65,7 @@ while count < lines_count-1:
         with open(label_filepath, 'w') as label_filehandle:
             file_count += 1
             while 'Enter Image Path' not in lines[count] :
-                if 'Car' in lines[count]:
+                if class_name in lines[count]:
                     label_filehandle.write('0 ' + GetBBox(lines[count]) + '\n')
                     bbox_count += 1
                 count += 1

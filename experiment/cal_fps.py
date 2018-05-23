@@ -1,7 +1,8 @@
 
 # experiment = 'cardet_20180416'
 # target_filepath = '%s/result.txt' % experiment
-target_filepath = 'eval/test_list_result/cardet_20180426_COCO.txt'
+# target_filepath = 'eval/test_list_result/cardet_20180426_COCO.txt'
+target_filepath = 'eval_plate/test_list_result/platedet_20180504_first.txt'
 
 
 def GetTime(line):
