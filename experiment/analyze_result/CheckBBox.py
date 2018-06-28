@@ -1,20 +1,20 @@
 import os
 import cv2
 
-root_dir = os.path.abspath(os.path.dirname(os.getcwd()) + os.path.sep + ".")
-imgslist_path = os.path.join(root_dir, 'filelist.txt')
+from analyze_result.experiment_config import experiment_config
+
+result_check = True
 
 
-with open(imgslist_path, 'r') as filehandle:
-    imgs_filelist = filehandle.readlines()
-imgs_count = len(imgs_filelist)
-
+# imgslist_path = '../case/%s/train.txt' % experiment_config['experiment']
+imgslist_path = '../case/%s/test.txt' % experiment_config['experiment']
 
 def GetLabelsPath(full_imgpath, split):
     img_dir = os.path.dirname(full_imgpath)
     img_name = os.path.basename(full_imgpath)
     label_name = '%s.txt' % (os.path.splitext(img_name)[0])
     label_dir = img_dir.replace('JPEGImages', split)
+    label_dir = img_dir.replace('images', split)
 
     label_filepath = os.path.join(label_dir, label_name)
 
@@ -50,10 +50,14 @@ def GetBBox(width, height, line):
         print('wrong label')
 
 
+with open(imgslist_path, 'r') as filehandle:
+    imgs_filelist = filehandle.readlines()
+imgs_count = len(imgs_filelist)
 
-for index in range(imgs_count):
-    print(imgs_filelist[index].replace('\n', ''))
-    full_imgpath = os.path.join(root_dir, imgs_filelist[index].replace('\n', ''))
+
+for index, line in enumerate(imgs_filelist):
+    full_imgpath = line.strip()
+    print(full_imgpath)
     img = cv2.imread(full_imgpath)
 
     if img is None:
@@ -71,14 +75,15 @@ for index in range(imgs_count):
             cv2.rectangle(img, (bb[0], bb[1]), (bb[2], bb[3]), (55, 255, 155), 3)
 
     # result bbox
-    with open(GetLabelsPath(full_imgpath, 'resultlabels'), 'r') as label_filehandle:
-        lines = label_filehandle.readlines()
-        print('result bbox: %d' % len(lines))
-        for line in lines:
-            bb = GetBBox(width, height, line)
-            if bb[4] >= 90:
-                cv2.rectangle(img, (bb[0], bb[1]), (bb[2], bb[3]), (255, 0, 255), 3)
-                cv2.putText(img, 'Car:%.2f'% (bb[4]/100), (bb[2]-150, bb[1]+30), cv2.FONT_HERSHEY_TRIPLEX, 1, (255, 0, 255), 1, False)
+    if result_check:
+        with open(GetLabelsPath(full_imgpath, 'resultlabels'), 'r') as label_filehandle:
+            lines = label_filehandle.readlines()
+            print('result bbox: %d' % len(lines))
+            for line in lines:
+                bb = GetBBox(width, height, line)
+                if bb[4] >= 90:
+                    cv2.rectangle(img, (bb[0], bb[1]), (bb[2], bb[3]), (255, 0, 255), 3)
+                    cv2.putText(img, 'Car:%.2f'% (bb[4]/100), (bb[2]-150, bb[1]+30), cv2.FONT_HERSHEY_TRIPLEX, 1, (255, 0, 255), 1, False)
 
     cv2.namedWindow('img', cv2.WINDOW_KEEPRATIO)
     cv2.imshow('img', img)

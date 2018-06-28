@@ -2,10 +2,10 @@ import os
 import numpy as np
 import matplotlib.pyplot as plt
 
-experiment = 'cardet_20180426'
+experiment = 'cardet_20180628'
 
-log_file = os.path.join(os.getcwd(), experiment, 'train.log')
-save_dir = os.path.join(os.getcwd(), experiment, 'results')
+log_file = '../case/%s/train.log' % experiment
+save_dir = '../case/%s/results' % experiment
 if not os.path.exists(save_dir):
     os.mkdir(save_dir)
 
