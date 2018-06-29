@@ -54,7 +54,7 @@ while count < lines_count-1:
         with open(label_filepath, 'w') as label_filehandle:
             file_count += 1
             while 'Enter Image Path' not in lines[count] :
-                if 'Car' in lines[count]:
+                if label_str in lines[count]:
                     label_filehandle.write('0 ' + GetBBox(lines[count]) + '\n')
                     bbox_count += 1
                 count += 1
