@@ -282,6 +282,31 @@ void print_imagenet_detections(FILE *fp, int id, detection *dets, int total, int
 	}
 }
 
+static void print_like_cocos(FILE *fp, int image_id, detection *dets, int num_boxes, int classes, int w, int h, int *pcount)
+{
+    int i, j;
+    for(i = 0; i < num_boxes; ++i){
+        float xmin = dets[i].bbox.x - dets[i].bbox.w/2.;
+        float xmax = dets[i].bbox.x + dets[i].bbox.w/2.;
+        float ymin = dets[i].bbox.y - dets[i].bbox.h/2.;
+        float ymax = dets[i].bbox.y + dets[i].bbox.h/2.;
+
+        if (xmin < 0) xmin = 0;
+        if (ymin < 0) ymin = 0;
+        if (xmax > w) xmax = w;
+        if (ymax > h) ymax = h;
+
+        float bx = xmin;
+        float by = ymin;
+        float bw = xmax - xmin;
+        float bh = ymax - ymin;
+
+        for(j = 0; j < classes; ++j){
+            if (dets[i].prob[j]) fprintf(fp, "{\"image_id\":%d, \"category_id\":%d, \"bbox\":[%f, %f, %f, %f], \"score\":%f, \"id\":%d, \"area\":%f},\n", image_id, coco_ids[j], bx, by, bw, bh, dets[i].prob[j], ++(*pcount), bw * bh);
+        }
+    }
+}
+
 void validate_detector(char *datacfg, char *cfgfile, char *weightfile, char *outfile)
 {
 	int j;
@@ -314,6 +339,11 @@ void validate_detector(char *datacfg, char *cfgfile, char *weightfile, char *out
 	FILE **fps = 0;
 	int coco = 0;
 	int imagenet = 0;
+
+	int like_coco = 0;
+	int count = 0;
+	int *pcount = &count;
+
 	if (0 == strcmp(type, "coco")) {
 		if (!outfile) outfile = "coco_results";
 		snprintf(buff, 1024, "%s/%s.json", prefix, outfile);
@@ -327,6 +357,13 @@ void validate_detector(char *datacfg, char *cfgfile, char *weightfile, char *out
 		fp = fopen(buff, "w");
 		imagenet = 1;
 		classes = 200;
+	}
+	else if (0 == strcmp(type, "like_coco")) {
+		if (!outfile) outfile = "like_coco_result";
+		snprintf(buff, 1024, "%s/%s.json", prefix, outfile);
+		fp = fopen(buff, "w");
+		fprintf(fp, "{\"annotations\":[\n");
+		like_coco = 1;
 	}
 	else {
 		if (!outfile) outfile = "comp4_det_test_";
@@ -356,7 +393,7 @@ void validate_detector(char *datacfg, char *cfgfile, char *weightfile, char *out
 	args.w = net.w;
 	args.h = net.h;
 	args.type = IMAGE_DATA;
-	//args.type = LETTERBOX_DATA;
+	// args.type = LETTERBOX_DATA;
 
 	for (t = 0; t < nthreads; ++t) {
 		args.path = paths[i + t];
@@ -395,6 +432,9 @@ void validate_detector(char *datacfg, char *cfgfile, char *weightfile, char *out
 			else if (imagenet) {
 				print_imagenet_detections(fp, i + t - nthreads + 1, dets, nboxes, classes, w, h);
 			}
+			else if (like_coco) {
+				print_like_cocos(fp, i + t - nthreads + 1, dets, nboxes, classes, w, h, pcount);
+			}
 			else {
 				print_detector_detections(fps, id, dets, nboxes, classes, w, h);
 			}
@@ -410,6 +450,11 @@ void validate_detector(char *datacfg, char *cfgfile, char *weightfile, char *out
 	if (coco) {
 		fseek(fp, -2, SEEK_CUR);
 		fprintf(fp, "\n]\n");
+		fclose(fp);
+	}
+	if (like_coco){
+		fseek(fp, -2, SEEK_CUR);
+		fprintf(fp, "\n]\n}");
 		fclose(fp);
 	}
 	fprintf(stderr, "Total Detection Time: %f Seconds\n", time(0) - start);
