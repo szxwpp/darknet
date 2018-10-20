@@ -32,8 +32,6 @@ CMakeLists.txt
 models/
 video/
 
-Makefile
-
 predictions.jpg
 
 bad.list
